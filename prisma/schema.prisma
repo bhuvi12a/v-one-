@@ -1,6 +1,6 @@
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -8,7 +8,7 @@ generator client {
 }
 
 model Product {
-  id          String      @id @default(uuid())
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String
   price       Float
@@ -21,7 +21,7 @@ model Product {
 }
 
 model Order {
-  id            String      @id @default(uuid())
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
   customerName  String
   customerEmail String
   customerPhone String?
@@ -36,10 +36,10 @@ model Order {
 }
 
 model OrderItem {
-  id        String  @id @default(uuid())
-  orderId   String
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  orderId   String  @db.ObjectId
   order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  productId String
+  productId String  @db.ObjectId
   product   Product @relation(fields: [productId], references: [id])
   quantity  Int
   price     Float
