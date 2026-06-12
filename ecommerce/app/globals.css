@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+:root {
+  --background: #08080a;
+  --foreground: #f3f4f6;
+  --primary-gold: #c5a880;
+  --primary-gold-hover: #d8c3a5;
+  --panel-bg: #111115;
+  --border-color: #1f1f23;
+  --text-muted: #9ca3af;
+  --accent-gold: #c5a880;
+  --accent-orange: #d97706;
+  --accent-yellow: #f59e0b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary-blue: var(--primary-gold); /* Map old primary-blue to gold to prevent breakages */
+  --color-primary-gold: var(--primary-gold);
+  --color-primary-gold-hover: var(--primary-gold-hover);
+  --color-panel-bg: var(--panel-bg);
+  --color-border-color: var(--border-color);
+  --color-border-light: var(--border-color);
+  --color-text-muted: var(--text-muted);
+  --color-accent-yellow: var(--accent-yellow);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-gold: var(--accent-gold);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #08080a;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Premium Atelier Glass Cards */
+.atelier-glass {
+  background: rgba(17, 17, 21, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.atelier-card {
+  background: #111115;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.atelier-card:hover {
+  border-color: rgba(197, 168, 128, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 1px 1px rgba(197, 168, 128, 0.1);
+  transform: translateY(-2px);
+}
+
+.atelier-input {
+  background: #16161c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 10px 14px;
+  color: #f3f4f6;
+  font-size: 13px;
+  transition: all 0.2s ease-in-out;
+}
+
+.atelier-input:focus {
+  outline: none;
+  border-color: var(--primary-gold);
+  box-shadow: 0 0 0 1px rgba(197, 168, 128, 0.2);
+  background: #181822;
+}
+
+/* Flipkart mappings for backward compatibility if needed */
+.fk-panel {
+  background: #111115;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+}
+
+.fk-card {
+  background: #111115;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fk-card:hover {
+  border-color: rgba(197, 168, 128, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.fk-input {
+  background: #16161c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 8px 12px;
+  color: #f3f4f6;
+  font-size: 13px;
+  transition: all 0.2s ease-in-out;
+}
+
+.fk-input:focus {
+  outline: none;
+  border-color: var(--primary-gold);
+}
+
+/* Animated hover gold link underline */
+.hover-underline-gold {
+  position: relative;
+}
+.hover-underline-gold::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--primary-gold);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+.hover-underline-gold:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Serif font style for headings */
+.font-serif-luxury {
+  font-family: var(--font-cormorant), 'Playfair Display', Georgia, serif;
+}
+
+.font-sans-luxury {
+  font-family: var(--font-inter), 'Inter', sans-serif;
+}

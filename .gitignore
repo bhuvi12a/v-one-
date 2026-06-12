@@ -1,0 +1,24 @@
+# dependencies
+**/node_modules/
+**/.next/
+**/out/
+**/build/
+**/.pnp
+.pnp.*
+
+# testing
+**/coverage/
+
+# database & environment
+**/*.db
+**/*.db-journal
+.env*
+.vercel
+
+# debug logs
+*debug.log*
+*error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
