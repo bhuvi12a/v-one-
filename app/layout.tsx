@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/components/cart-context";
+import { AuthProvider } from "@/components/auth-context";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
@@ -34,11 +35,13 @@ export default function RootLayout({
       className={`${cormorantGaramond.variable} ${inter.variable} h-full antialiased dark`}
     >
       <body className="min-h-full flex flex-col bg-[#08080a] text-neutral-100 selection:bg-[#c5a880]/30 selection:text-white">
-        <CartProvider>
-          <Navbar />
-          <main className="flex-grow flex flex-col">{children}</main>
-          <Footer />
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <Navbar />
+            <main className="flex-grow flex flex-col">{children}</main>
+            <Footer />
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -5,9 +5,11 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { ShoppingCart, Search, Menu, X, Star, ShieldAlert } from 'lucide-react';
 import { useCart } from './cart-context';
+import { useAuth } from './auth-context';
 
 export default function Navbar() {
   const { cartCount } = useCart();
+  const { user, signOut } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -97,10 +99,22 @@ export default function Navbar() {
               <span>Cart</span>
             </Link>
 
-            {/* Minimalist Login Button */}
-            <button className="border border-[#c5a880]/30 hover:border-[#c5a880] text-[#c5a880] hover:bg-[#c5a880]/5 px-6 py-1.5 rounded-full transition-all font-bold tracking-widest uppercase">
-              Login
-            </button>
+            {/* Minimalist Login/Logout Button */}
+            {user ? (
+              <button
+                onClick={() => signOut()}
+                className="border border-white/10 hover:border-rose-500/50 text-neutral-300 hover:text-rose-400 px-6 py-1.5 rounded-full transition-all font-bold tracking-widest uppercase cursor-pointer"
+              >
+                Sign Out
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="border border-[#c5a880]/30 hover:border-[#c5a880] text-[#c5a880] hover:bg-[#c5a880]/5 px-6 py-1.5 rounded-full transition-all font-bold tracking-widest uppercase text-center"
+              >
+                Login
+              </Link>
+            )}
 
           </div>
 
@@ -156,9 +170,25 @@ export default function Navbar() {
               <ShieldAlert className="h-4 w-4 text-[#c5a880]" />
               <span>Admin Dashboard</span>
             </Link>
-            <button className="w-full border border-[#c5a880]/30 text-[#c5a880] hover:bg-[#c5a880]/10 font-bold text-xs py-2.5 rounded-full mt-4 tracking-widest uppercase">
-              Login
-            </button>
+            {user ? (
+              <button
+                onClick={() => {
+                  signOut();
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full border border-white/10 text-neutral-400 hover:text-rose-400 font-bold text-xs py-2.5 rounded-full mt-4 tracking-widest uppercase cursor-pointer"
+              >
+                Sign Out
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full block border border-[#c5a880]/30 text-[#c5a880] hover:bg-[#c5a880]/10 font-bold text-xs py-2.5 rounded-full mt-4 tracking-widest uppercase text-center"
+              >
+                Login
+              </Link>
+            )}
           </div>
         </div>
       )}
