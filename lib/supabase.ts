@@ -7,7 +7,17 @@ if (!supabaseUrl || !supabaseAnonKey) {
   console.warn('Warning: Supabase credentials are not defined in environment variables.');
 }
 
-export const supabase = createClient(
-  supabaseUrl || 'https://placeholder.supabase.co',
-  supabaseAnonKey || 'placeholder'
-);
+const isValidUrl = (url: string | undefined): boolean => {
+  if (!url) return false;
+  try {
+    new URL(url);
+    return url.startsWith('http://') || url.startsWith('https://');
+  } catch {
+    return false;
+  }
+};
+
+const finalUrl = isValidUrl(supabaseUrl) ? supabaseUrl! : 'https://placeholder.supabase.co';
+const finalKey = supabaseAnonKey || 'placeholder';
+
+export const supabase = createClient(finalUrl, finalKey);

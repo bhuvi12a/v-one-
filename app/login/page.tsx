@@ -1,13 +1,14 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/components/auth-context';
 import { Shield, Key, Mail, UserPlus, LogIn, Loader } from 'lucide-react';
-import Link from 'next/link';
 
-export default function LoginPage() {
+export const dynamic = 'force-dynamic';
+
+function LoginForm() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -143,7 +144,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full inline-flex items-center justify-center gap-2 bg-[#c5a880] text-black hover:bg-transparent hover:text-[#c5a880] border border-[#c5a880] py-3 rounded-md text-xs font-bold shadow-lg transition-all duration-300 uppercase tracking-widest disabled:opacity-50 disabled:pointer-events-none mt-2"
+            className="w-full inline-flex items-center justify-center gap-2 bg-[#c5a880] text-black hover:bg-transparent hover:text-[#c5a880] border border-[#c5a880] py-3 rounded-md text-xs font-bold shadow-lg transition-all duration-300 uppercase tracking-widest disabled:opacity-50 disabled:pointer-events-none mt-2 cursor-pointer"
           >
             {loading ? (
               <Loader className="h-4 w-4 animate-spin" />
@@ -175,5 +176,17 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#08080a] flex items-center justify-center">
+        <Loader className="h-8 w-8 animate-spin text-[#c5a880]" />
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }
