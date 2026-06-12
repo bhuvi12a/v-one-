@@ -11,7 +11,7 @@ const categories = [
   { name: 'Activewear', icon: Flame, color: 'text-[#c5a880] bg-[#c5a880]/5' },
 ];
 
-export const revalidate = 0; // Disable cache to reflect live products
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   let products: Product[] = [];

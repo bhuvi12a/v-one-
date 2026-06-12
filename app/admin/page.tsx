@@ -3,7 +3,7 @@ import { db } from '@/lib/db';
 import AdminDashboard from '@/components/admin-dashboard';
 import { Product, Order } from '@/types';
 
-export const revalidate = 0; // Disable cache to reflect real-time dashboard updates
+export const dynamic = 'force-dynamic';
 
 export default async function AdminPage() {
   let products: Product[] = [];

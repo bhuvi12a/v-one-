@@ -7,7 +7,7 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-export const revalidate = 0;
+export const dynamic = 'force-dynamic';
 
 export default async function ProductPage({ params }: PageProps) {
   const { id } = await params;

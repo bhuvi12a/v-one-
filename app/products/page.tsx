@@ -3,7 +3,7 @@ import { db } from '@/lib/db';
 import ProductCatalog from '@/components/product-catalog';
 import { Product } from '@/types';
 
-export const revalidate = 0; // Disable cache so the product inventory changes reflect instantly
+export const dynamic = 'force-dynamic';
 
 export default async function ProductsPage() {
   let products: Product[] = [];
